@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
 function About() {
   return (
-    <div className="about-page">
-      <h1>About This Project</h1>
-      <p>
-        This web application integrates a trained AI model to detect spam and malware.
-        It was built using React (frontend) and FastAPI (backend).
-      </p>
+    <div className = "about-page">
+      <h1>About Us</h1>
+      <p>Tmp Assignment 3 project about spam detection</p>
+      <p>Sofia</p>
+      <p>Lexi</p>
+      <p>Cody</p>
     </div>
   );
 }
