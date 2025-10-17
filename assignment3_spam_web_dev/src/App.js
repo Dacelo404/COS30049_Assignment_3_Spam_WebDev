@@ -28,10 +28,13 @@
 
 import React, {useState} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// components
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Footer from "./components/Footer";
+
+// css
 import "./assets/styles/styles.css";
 import "./assets/styles/navbar.css";
 import "./assets/styles/footer.css";

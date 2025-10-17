@@ -10,7 +10,7 @@ function Navbar({darkMode, toggleDarkMode}) {
         <Typography sx={{ flexGrow: 1 }}>
         </Typography>
         <button onClick={toggleDarkMode}>
-        {darkMode ? "Light" : "Dark"}
+        {darkMode ? "Dark" : "Light"}
         </button>
         <Button color="inherit" component={Link} to="/">
         Home

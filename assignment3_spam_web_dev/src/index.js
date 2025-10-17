@@ -21,8 +21,10 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./assets/styles/styles.css";
 import App from "./App";
+
+// css
+import "./assets/styles/styles.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

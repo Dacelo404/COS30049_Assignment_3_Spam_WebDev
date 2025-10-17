@@ -1,0 +1,16 @@
+html, body, #root {
+  height: 100%;
+}
+
+.light-mode, .dark-mode {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  margin-top: auto;
+  padding: 1rem;
+  text-align: center;
+  background: #61b5ff;
+}

@@ -4,23 +4,20 @@ body {
   padding: 0;
 }
 
-.header, .footer {
-  background: #222;
-  color: #fff;
-  padding: 1rem;
+
+
+/* dark mode */
+body, html, #root {
+  margin: 0;
+  height: 100%;
 }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
+.light-mode {
+  background-color: #ffffff;
+  color: #000000;
 }
 
-.nav-links li a {
-  color: white;
-  text-decoration: none;
-}
-
-main {
-  padding: 2rem;
+.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
 }
