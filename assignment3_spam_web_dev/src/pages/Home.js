@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import FileUpload from "../components/FileUpload";
 import ResultsOverview from "../components/ResultsOverview";
-// import ResultsTable from "../components/ResultsTable";
-import { Container, Typography, Box } from "@mui/material";
+import { Container, Typography, Box, Paper, Grid, Button } from "@mui/material";
+
+import ChartBlock from "../components/ChartBlock";
 
 function Home() {
 const [results, setResults] = useState(null);
+const [fileInfo, setFileInfo] = useState(null);
 
   // TMP, CHANGE LATER FOR API STUFF
   const handleFileUpload = (files) => {
     console.log("Uploaded files:", files);
 
+
+
     // TMP DATA FOR TEST
     const tmpResults = {
-      overview: {
+      summary: {
         healthy: 12,
         risk: 42,
         spam: 3,
@@ -28,21 +32,54 @@ const [results, setResults] = useState(null);
   };
 
   return (
-    <Container sx={{ py: 4 }}>
-      <Typography variant="h3" gutterBottom>
-      Spam Detector
-      </Typography>
+    <Container maxWidth="md" sx={{ py: 4 }}>
+      {/* intro spiel */}
+      <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
+        <Typography variant="h4" gutterBottom>Intro to Project</Typography>
+        <Typography variant="body1">
+          Using our AI machine learning model, you can upload datasets in CSV or TXT format.
+          Add more details here...
+        </Typography>
+      </Paper>
 
-      <FileUpload onUpload={handleFileUpload} />
+      {/* upload + overview results */}
+      <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
+        {!results ? (
+          <>
+            <Typography variant="h6" gutterBottom>Upload CSV or TXT File</Typography>
+            <FileUpload onUpload={handleFileUpload} />
+          </>
+        ) : (
+          <>
+            <Typography variant="h5" gutterBottom>
+              Results Overview
+            </Typography>
+            <Typography variant="subtitle1" gutterBottom>
+              Uploaded file: {fileInfo?.name} ({fileInfo?.size})
+            </Typography>
+            <Typography>Healthy: {results.summary.healthy}</Typography>
+            <Typography>Potential Risk: {results.summary.risk}</Typography>
+            <Typography>Spam: {results.summary.spam}</Typography>
+            <Box sx={{ mt: 2 }}>
+              <ResultsOverview overview={results.summary} tableRows={results.table} />
+            </Box>
+          </>
+        )}
+      </Paper>
 
-      {results && (
-        <Box sx={{ mt: 4 }}>
-          <ResultsOverview 
-            overview={results.overview} 
-            tableRows={results.table} 
-          />
-        </Box>
-      )}
+      {/* how to use + charts area */}
+      <Paper elevation={3} sx={{ p: 3 }}>
+        {!results ? (
+          <Box sx={{ textAlign: "center" }}>
+            <Typography variant="h6" gutterBottom>How to Use</Typography>
+            <Typography>Step 1: Upload a CSV file</Typography>
+            <Typography>Step 2: View Results</Typography>
+            <Typography>Step 3: Explore AI Performance</Typography>
+          </Box>
+        ) : (
+          <ChartBlock />
+        )}
+      </Paper>
     </Container>
   );
 }

@@ -5,50 +5,28 @@ import { DataGrid } from "@mui/x-data-grid";
 function ResultsOverview({ overview, tableRows }) {
   // Columns for DataGrid
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "category", headerName: "Category", width: 150 },
-    { field: "subject", headerName: "Subject", width: 250 },
-    { field: "content", headerName: "Content", width: 400 },
+    { field: "id", headerName: "ID", flex: 0.5, minWidth: 20},
+    { field: "category", headerName: "Category", flex: 1, minWidth: 100  },
+    { field: "subject", headerName: "Subject", flex: 2, minWidth: 200 },
+    { field: "content", headerName: "Content", flex: 3, minWidth: 200 },
     {
       field: "confidence",
       headerName: "Confidence",
-      width: 150,
-      valueFormatter: (params) => (params.value * 100).toFixed(1) + "%",
+      flex: 0.5,
+      minWidth: 100,
+      valueFormatter: (params) => 
+      {
+        //convert to num in case string + convert to percent or N/A is invalid
+        const value = Number(params.value);
+        return isNaN(value) ? "N/A" : `${(value * 100).toFixed(1)}%`
+      },
     },
   ];
 
   return (
     <div>
-      {/* Overview Cards */}
-      <Grid container spacing={3} sx={{ my: 2 }}>
-        <Grid item xs={12} sm={4}>
-          <Card>
-            <CardContent>
-              <Typography variant="h5">Healthy</Typography>
-              <Typography variant="h4">{overview.healthy}</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Card>
-            <CardContent>
-              <Typography variant="h5">Potential Risks</Typography>
-              <Typography variant="h4">{overview.risk}</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Card>
-            <CardContent>
-              <Typography variant="h5">Spam</Typography>
-              <Typography variant="h4">{overview.spam}</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-
       {/* Data Table */}
-      <div style={{ height: 400, width: "100%", marginTop: "1rem" }}>
+      <div style={{ height: 400, width: "100%", marginTop: "1rem", overflowX: "auto"}}>
         <DataGrid rows={tableRows} columns={columns} pageSize={5} />
       </div>
     </div>

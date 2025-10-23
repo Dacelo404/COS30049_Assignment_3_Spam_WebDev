@@ -1,9 +1,14 @@
-import React, { useState } from "react";
-import { Card, CardContent, Typography, Button } from "@mui/material";
+import React, { useState, useRef } from "react";
+import { Card, CardContent, Typography, Button, Box } from "@mui/material";
 import axios from "axios";
+
+import "../assets/styles/FileUpload_Style.css";
+import uploadIcon from "../assets/images/test.png"; 
 
 function FileUpload({ onUpload }) {
   const [selectedFile, setSelectedFile] = useState(null);
+
+  const fileInputRef = useRef(null);
 
   // file selection
   const handleFileChange = (event) => {
@@ -18,8 +23,8 @@ function FileUpload({ onUpload }) {
     }
 
     // file size limit
-    if (file.size < 5000000) {
-      alert("File size exceeds 5MB.");
+    if (file.size > 10000000) {
+      alert("File size exceeds 10MB.");
       return;
     }
 
@@ -68,9 +73,9 @@ function FileUpload({ onUpload }) {
 
       // TMP data
       const TMPData = {
-        overview: {
-          healthy: 10,
-          risk: 2,
+        summary: {
+          healthy: 12,
+          risk: 42,
           spam: 3,
         },
         table: [
@@ -85,35 +90,70 @@ function FileUpload({ onUpload }) {
     }, 1000);
   };
 
+
+
+  // ************ Keeping for now, will del later ************
+
+
+
+  // return (
+  //   <Card sx={{ p: 3, textAlign: "center" }}>
+  //     <CardContent>
+  //       <Typography variant="h6" gutterBottom>
+  //         Upload Data (TXT/CSV)
+  //       </Typography>
+
+  //       <Button variant="contained" component="label" sx={{ m: 1 }}>
+  //         Choose File
+  //         <input type="file" hidden onChange={handleFileChange} />
+  //       </Button>
+
+  //       <Button
+  //         variant="outlined"
+  //         color="primary"
+  //         sx={{ m: 1 }}
+  //         onClick={handleUpload}
+  //         disabled={!selectedFile}
+  //       >
+  //         Upload
+  //       </Button>
+
+  //       {selectedFile && (
+  //         <Typography variant="body2" sx={{ mt: 2 }}>
+  //           Selected: {selectedFile.name} ({(selectedFile.size / 1024).toFixed(1)} KB)
+  //         </Typography>
+  //       )}
+  //     </CardContent>
+  //   </Card>
+  // );
+
+
+
   return (
-    <Card sx={{ p: 3, textAlign: "center" }}>
-      <CardContent>
-        <Typography variant="h6" gutterBottom>
-          Upload Email Data (TXT/CSV)
+    <Box className="upload-wrapper">
+      <Box className="upload-container" onClick={() => fileInputRef.current.click()}>
+        <input type="file" ref={fileInputRef} hidden onChange={handleFileChange} />
+        <img src={uploadIcon} alt="Upload" className="upload-icon" />
+      </Box>
+
+      {selectedFile && (
+        <Typography className="file-info">
+          {selectedFile.name} ({
+          (selectedFile.size / 1048576).toFixed(2)} MB)
         </Typography>
+      )}
 
-        <Button variant="contained" component="label" sx={{ m: 1 }}>
-          Choose File
-          <input type="file" hidden onChange={handleFileChange} />
-        </Button>
-
-        <Button
-          variant="outlined"
-          color="primary"
-          sx={{ m: 1 }}
-          onClick={handleUpload}
-          disabled={!selectedFile}
-        >
-          Upload
-        </Button>
-
-        {selectedFile && (
-          <Typography variant="body2" sx={{ mt: 2 }}>
-            Selected: {selectedFile.name} ({(selectedFile.size / 1024).toFixed(1)} KB)
-          </Typography>
-        )}
-      </CardContent>
-    </Card>
+      <Button
+        variant="contained"
+        size="small"
+        color="primary"
+        className="upload-button"
+        onClick={handleUpload}
+        disabled={!selectedFile}
+      >
+        Upload
+      </Button>
+    </Box>
   );
 }
 
