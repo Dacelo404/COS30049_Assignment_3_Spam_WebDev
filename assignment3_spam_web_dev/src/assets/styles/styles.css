@@ -21,3 +21,9 @@ body, html, #root {
   background-color: #121212;
   color: #ffffff;
 }
+
+
+/* width */
+.MuiContainer-root {
+  max-width: clamp(70%, 90%, 100%) !important;
+}

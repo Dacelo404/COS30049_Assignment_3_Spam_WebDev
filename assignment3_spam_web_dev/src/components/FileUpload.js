@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Card, CardContent, Typography, Button, Box } from "@mui/material";
 import axios from "axios";
+import Snackbar from '@mui/material/Snackbar';
 
 import "../assets/styles/FileUpload_Style.css";
 import uploadIcon from "../assets/images/test.png"; 
@@ -22,6 +23,7 @@ function FileUpload({ onUpload }) {
       return;
     }
 
+    
     // file size limit
     if (file.size > 10000000) {
       alert("File size exceeds 10MB.");
@@ -85,47 +87,10 @@ function FileUpload({ onUpload }) {
         ],
       };
 
-      if (onUpload) onUpload(TMPData);
+      if (onUpload) onUpload(TMPData, selectedFile);
       alert("*TMP* File uploaded successfully.");
     }, 1000);
   };
-
-
-
-  // ************ Keeping for now, will del later ************
-
-
-
-  // return (
-  //   <Card sx={{ p: 3, textAlign: "center" }}>
-  //     <CardContent>
-  //       <Typography variant="h6" gutterBottom>
-  //         Upload Data (TXT/CSV)
-  //       </Typography>
-
-  //       <Button variant="contained" component="label" sx={{ m: 1 }}>
-  //         Choose File
-  //         <input type="file" hidden onChange={handleFileChange} />
-  //       </Button>
-
-  //       <Button
-  //         variant="outlined"
-  //         color="primary"
-  //         sx={{ m: 1 }}
-  //         onClick={handleUpload}
-  //         disabled={!selectedFile}
-  //       >
-  //         Upload
-  //       </Button>
-
-  //       {selectedFile && (
-  //         <Typography variant="body2" sx={{ mt: 2 }}>
-  //           Selected: {selectedFile.name} ({(selectedFile.size / 1024).toFixed(1)} KB)
-  //         </Typography>
-  //       )}
-  //     </CardContent>
-  //   </Card>
-  // );
 
 
 

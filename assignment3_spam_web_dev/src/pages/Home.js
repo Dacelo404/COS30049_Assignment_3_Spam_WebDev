@@ -10,10 +10,14 @@ const [results, setResults] = useState(null);
 const [fileInfo, setFileInfo] = useState(null);
 
   // TMP, CHANGE LATER FOR API STUFF
-  const handleFileUpload = (files) => {
-    console.log("Uploaded files:", files);
+  const handleFileUpload = (resultsData, file) => {
+    console.log("Uploaded file:", file);
 
-
+  setResults(resultsData);
+  setFileInfo({
+    name: file.name,
+    size: (file.size / 1048576).toFixed(2) + " MB",
+  });
 
     // TMP DATA FOR TEST
     const tmpResults = {
