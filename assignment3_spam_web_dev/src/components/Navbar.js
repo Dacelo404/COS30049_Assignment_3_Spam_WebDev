@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function Navbar({darkMode, toggleDarkMode}) {
   return (
-    <AppBar position="static">
+    <AppBar position="static" className="navbar">
       <Toolbar>
         <Typography sx={{ flexGrow: 1 }}>
         </Typography>

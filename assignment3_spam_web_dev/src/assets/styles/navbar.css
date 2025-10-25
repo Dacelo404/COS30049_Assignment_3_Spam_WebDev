@@ -1,0 +1,30 @@
+.navbar {
+  margin-top: auto;
+  padding: 1vw;
+  background: var(--primary-light) !important; 
+  border-radius: 0 !important;
+}
+
+.navbar .MuiButton-root {
+    color: var(--text-color);
+}
+
+.navbar button {
+    background-color: var(--primary-hover);
+    border: 1px solid var(--text-color-inverted);
+    color: var(--text-color-const-black);
+    padding: 8px 12px;
+    margin-right: 16px;
+    cursor: pointer;
+    border-radius: 18px;
+    transition: background-color 0.4s;
+}
+
+.navbar button:hover {
+    background-color: var(--primary-hover);
+}
+
+.navbar .MuiButton-root:hover {
+    background-color: var(--primary-hover);
+    border-radius: 18px;
+}

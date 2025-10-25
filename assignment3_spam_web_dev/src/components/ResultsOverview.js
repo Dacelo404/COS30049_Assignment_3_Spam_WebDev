@@ -5,7 +5,7 @@ import { DataGrid } from "@mui/x-data-grid";
 function ResultsOverview({ overview, tableRows }) {
   // Columns for DataGrid
   const columns = [
-    { field: "id", headerName: "ID", flex: 0.5, minWidth: 20},
+    { field: "id", headerName: "ID", flex: 0.5, minWidth: 40},
     { field: "category", headerName: "Category", flex: 1, minWidth: 100  },
     { field: "subject", headerName: "Subject", flex: 2, minWidth: 200 },
     { field: "content", headerName: "Content", flex: 3, minWidth: 200 },

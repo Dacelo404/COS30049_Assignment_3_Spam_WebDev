@@ -36,11 +36,11 @@ const [fileInfo, setFileInfo] = useState(null);
   };
 
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
+    <Container  maxWidth="md" sx={{ py: 4 }}>
       {/* intro spiel */}
       <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
-        <Typography variant="h4" gutterBottom>Intro to Project</Typography>
-        <Typography variant="body1">
+        <Typography variant="h1" gutterBottom>Intro to Project</Typography>
+        <Typography variant="body">
           Using our AI machine learning model, you can upload datasets in CSV or TXT format.
           Add more details here...
         </Typography>

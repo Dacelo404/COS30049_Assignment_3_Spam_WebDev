@@ -1,31 +1,3 @@
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-// src/App.js
-
 import React, {useState} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // components
@@ -38,6 +10,7 @@ import Footer from "./components/Footer";
 import "./assets/styles/styles.css";
 import "./assets/styles/navbar.css";
 import "./assets/styles/footer.css";
+import "./assets/styles/ResultsOverview.css";
 
 function App() {
 
@@ -47,7 +20,8 @@ function App() {
 
   return (
     <Router>
-      <div className={darkMode ? "dark-mode" : "light-mode"}>
+      <div data-theme={darkMode ? "dark" : "light"} className="app-container">
+      {/* <div className={darkMode ? "dark-mode" : "light-mode"}> */}
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
       <Routes>
         <Route path="/" element={<Home />} />

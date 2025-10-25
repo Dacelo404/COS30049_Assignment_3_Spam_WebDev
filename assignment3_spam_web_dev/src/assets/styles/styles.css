@@ -1,29 +1,97 @@
+:root {
+  /* Light mode */
+  --bg-colour-light: #F4F6F6;
+  --bg-colour-med: #e7e7e7;
+  --bg-colour-dark: #F4F6F6;
+  --bg-colour-darkTMP: #232702;
+  
+  --text-color: #232702;
+  --text-color-inverted: #F4F6F6;
+  --text-color-const-black: #232702;
+
+
+  --primary-colour: #8AA27D;
+  --primary-light: #B7C5AC;
+  --accent-sage: #B6BE82;
+  --tertiary: #D5C6AE;
+
+  --primary-hover: #D8E0D2;
+    --table-second-accent: rgba(0, 0, 0, 0.07);
+
+  --test: red;
+}
+
+[data-theme='dark'] {
+  --bg-colour-light: #444444;
+  --bg-colour-med: #282828;
+  --bg-colour-dark: #0c0e00;
+
+  --text-color: #F4F6F6;
+  --text-color-inverted: #232702;
+  --text-color-const-black: #232702;
+  
+  --primary-colour: #B7C5AC;
+  --primary-light: #8AA27D;
+  --accent-sage: #D5C6AE;
+  --tertiary: #65573f;
+
+  --primary-hover: #D8E0D2;
+  --table-second-accent: rgba(0, 0, 0, 0.6);
+
+  --test: blue;
+}
+
+
+
+
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-}
-
-
-
-/* dark mode */
-body, html, #root {
-  margin: 0;
-  height: 100%;
-}
-
-.light-mode {
-  background-color: #ffffff;
-  color: #000000;
-}
-
-.dark-mode {
-  background-color: #121212;
-  color: #ffffff;
 }
 
 
 /* width */
 .MuiContainer-root {
   max-width: clamp(70%, 90%, 100%) !important;
+}
+
+
+/* font stuff */
+h1 {
+font-family: "dejanire-headline", serif !important;
+font-weight: 700 !important;
+font-style: normal !important;
+
+font-size: clamp(2rem, 4vw + 1rem, 5rem) !important;
+}
+
+
+h2, h3, h4, h5, h6 {
+  font-family: "itc-avant-garde-gothic-pro", sans-serif !important;
+  font-weight: 300 !important;
+}
+
+body, p, span, li {
+  font-family: "arboria", sans-serif !important;
+  font-weight: 400;
+  font-size: clamp(1rem, 1vw + 0.8rem, 1.5rem) !important;
+}
+
+/* dark mode transition here */
+.app-container {
+    background-color: var(--bg-colour-dark);
+    color: var(--text-color);
+    transition: background-color 0.4s, color 0.4s;
+}
+
+
+.test {
+  background-color: red;
+}
+
+.MuiPaper-root {
+    background-color: var(--bg-colour-med) !important; 
+    color: var(--text-color) !important;
+    transition: background-color 0.4s, color 0.4s;
+    border-radius: 12px !important;
 }

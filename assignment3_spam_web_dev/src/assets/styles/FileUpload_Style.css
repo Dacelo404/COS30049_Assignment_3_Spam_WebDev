@@ -15,7 +15,7 @@
   border-radius: 12px;
   width: 100%; 
   height: 180px;
-  background-color: #f8f8f8;
+  background-color: var(--bg-colour-light);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,7 +26,7 @@
 }
 
 .upload-container:hover {
-  background-color: #f0f0f0;
+  background-color: var(--primary-hover);
 }
 
 .upload-icon {
@@ -49,4 +49,13 @@
   position: absolute !important;
   bottom: 20px;
   right: 5px; 
+  background-color: var(--accent-sage) !important;
+  border: 1px solid var(--text-color-inverted) !important;
+  color: var(--text-color-const-black) !important;
+  border-radius: 18px !important;
+  transition: background-color 0.4s !important;
+}
+
+.upload-button:hover {
+  background-color: var(--primary-hover) !important;
 }
