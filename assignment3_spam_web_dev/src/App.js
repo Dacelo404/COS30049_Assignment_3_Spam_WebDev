@@ -11,6 +11,7 @@ import "./assets/styles/styles.css";
 import "./assets/styles/navbar.css";
 import "./assets/styles/footer.css";
 import "./assets/styles/ResultsOverview.css";
+import "./assets/styles/Charts.css";
 
 function App() {
 

@@ -56,6 +56,7 @@ function SpamConfidence({
     const tooltip = d3.select(chartRef.current)
         .append("div")
         .style("position", "absolute")
+        .attr("class", "chart-tooltip")
         .style("background", "white")
         .style("padding", "4px 8px")
         .style("border", "1px solid #ccc")
@@ -161,11 +162,12 @@ function SpamConfidence({
     // title
     svg.append("text")
         .attr("x", width / 2)
+        .attr("class", "chart-title")
         .attr("y", -10)
         .attr("text-anchor", "middle")
         .style("font-weight", "bold")
         .style("font-size", "14px")
-        .text("Spam Confidence Curve by Email ID");
+        .text("Spam Confidence Scores");
   };
 
   useEffect(() => {

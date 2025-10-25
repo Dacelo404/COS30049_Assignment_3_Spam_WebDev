@@ -14,17 +14,17 @@ function ChartBlock() {
 
 
   return (
-    <Box sx={{ textAlign: "center" }}>
+    <Box className="chart-container" sx={{ textAlign: "center" }}>
       {chartIndex === 0 && <SpamRatio_Pie />}
       {chartIndex === 1 && <SusWords_Bar />}
       {chartIndex === 2 && <ClusterData_Scatter />}
       {chartIndex === 3 && <Spam_Confidence />}
 
       <Box sx={{ mt: 2 }}>
-        <Button variant="outlined" onClick={handlePrev} sx={{ mr: 2 }}>
+        <Button variant="outlined" className="chart-button" onClick={handlePrev} sx={{ mr: 2 }}>
           Previous
         </Button>
-        <Button variant="contained" onClick={handleNext}>
+        <Button variant="contained" className="chart-button" onClick={handleNext}>
           Next
         </Button>
       </Box>

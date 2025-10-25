@@ -16,7 +16,11 @@
   --tertiary: #D5C6AE;
 
   --primary-hover: #D8E0D2;
-    --table-second-accent: rgba(0, 0, 0, 0.07);
+  --table-second-accent: rgba(0, 0, 0, 0.07);
+
+  --box-shadow-light: rgba(0, 0, 0, 0.25);
+  --box-shadow-dark: rgba(255, 255, 255, 0.15);
+
 
   --test: red;
 }
@@ -37,6 +41,9 @@
 
   --primary-hover: #D8E0D2;
   --table-second-accent: rgba(0, 0, 0, 0.6);
+
+  --box-shadow-light: rgba(255, 255, 255, 0.15);
+  --box-shadow-dark: rgba(0, 0, 0, 0.25);
 
   --test: blue;
 }
@@ -85,13 +92,16 @@ body, p, span, li {
 }
 
 
-.test {
-  background-color: red;
-}
-
 .MuiPaper-root {
-    background-color: var(--bg-colour-med) !important; 
-    color: var(--text-color) !important;
-    transition: background-color 0.4s, color 0.4s;
-    border-radius: 12px !important;
+  background-color: var(--bg-colour-med) !important;
+  color: var(--text-color) !important;
+  border-radius: 12px !important;
+  transition: background-color 0.4s, color 0.4s;
+
+  box-shadow: none !important;
+  --Paper-shadow: none !important;
+
+  box-shadow:
+    0 6px 12px var(--box-shadow-light),
+    0 -2px 6px var(--box-shadow-dark) !important;
 }

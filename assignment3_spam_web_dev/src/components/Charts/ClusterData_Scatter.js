@@ -51,6 +51,7 @@ function ClusterData_Scatter({
     const tooltip = d3
       .select(chartRef.current)
       .append("div")
+      .attr("class", "chart-tooltip")
       .style("position", "absolute")
       .style("background", "white")
       .style("padding", "4px 8px")
@@ -128,6 +129,7 @@ function ClusterData_Scatter({
     // title
     svg.append("text")
       .attr("x", width / 2)
+      .attr("class", "chart-title")
       .attr("y", -10)
       .attr("text-anchor", "middle")
       .style("font-weight", "bold")

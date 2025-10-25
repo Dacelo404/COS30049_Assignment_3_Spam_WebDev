@@ -1,0 +1,49 @@
+.chart-button {
+  background-color: var(--accent-sage) !important;
+  border: 1px solid var(--text-color-inverted) !important;
+  color: var(--text-color-const-black) !important;
+  border-radius: 18px !important;
+  transition: background-color 0.4s !important;
+}
+
+.chart-button:hover {
+  background-color: var(--primary-hover) !important;
+}
+
+.chart-container {
+  color: var(--text-color) !important;
+  position: relative;
+}
+
+
+
+/* Chart titles (SVG <text> elements) */
+svg text.chart-title {
+  fill: var(--text-color) !important;
+font-family: "dejanire-headline", serif !important;
+font-weight: 700 !important;
+font-style: normal !important;
+
+  font-size: clamp(1rem, 1vw + 0.8rem, 1.5rem) !important;
+}
+
+
+
+/* D3 tooltips */
+.chart-tooltip {
+  color: var(--text-color) !important;
+  background-color: var(--bg-colour-light) !important;
+  border: 1px solid var(--text-color-inverted) !important;
+  border-radius: 6px;
+  padding: 6px 10px;
+  pointer-events: none;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* chart titles + axis etc */
+.chart-container text {
+  fill: var(--text-color) !important;
+
+}
+

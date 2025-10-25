@@ -31,6 +31,7 @@ function SpamRatio_Pie({ data = { spam: 23, not_spam: 77 } }) {
         // title
             svg.append("text")
             .attr("x", 0) 
+            .attr("class", "chart-title")
             .attr("y", -height / 2 + 10)
             .attr("text-anchor", "middle")
             .style("font-size", "14px")
@@ -51,6 +52,7 @@ function SpamRatio_Pie({ data = { spam: 23, not_spam: 77 } }) {
         // tooltip 
         const tooltip = d3.select(chartRef.current)
             .append("div")
+            .attr("class", "chart-tooltip")
             .style("position", "absolute")
             .style("background", "white")
             .style("padding", "4px 8px")
