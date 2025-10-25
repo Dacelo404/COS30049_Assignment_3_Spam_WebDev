@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // components
 import Navbar from "./components/Navbar";
@@ -19,11 +19,24 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
+  const [fontScale, setFontScale] = useState(1);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--font-scale', fontScale);
+  }, [fontScale]);
+
+  const increaseFont = () => setFontScale((prev) => Math.min(prev + 0.1, 1.5));
+  const resetFont = () => setFontScale(1);
+
   return (
     <Router>
       <div data-theme={darkMode ? "dark" : "light"} className="app-container">
-      {/* <div className={darkMode ? "dark-mode" : "light-mode"}> */}
-      <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
+      <Navbar
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        increaseFont={increaseFont}
+        resetFont={resetFont}
+      />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About/>} />

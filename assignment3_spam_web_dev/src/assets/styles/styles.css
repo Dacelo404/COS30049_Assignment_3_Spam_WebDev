@@ -23,6 +23,8 @@
 
 
   --test: red;
+
+--font-scale: font-size: clamp(1rem, 1vw + 0.8rem, 1.5rem);
 }
 
 [data-theme='dark'] {
@@ -68,8 +70,8 @@ h1 {
 font-family: "dejanire-headline", serif !important;
 font-weight: 700 !important;
 font-style: normal !important;
-
-font-size: clamp(2rem, 4vw + 1rem, 5rem) !important;
+/* font-size: clamp(2rem, 4vw + 1rem, 5rem) !important; */
+font-size: calc(var(--font-scale) * 2.25em) !important;
 }
 
 
@@ -78,11 +80,22 @@ h2, h3, h4, h5, h6 {
   font-weight: 300 !important;
 }
 
-body, p, span, li {
+
+
+/* font scaling */
+
+body, p, span, li{
   font-family: "arboria", sans-serif !important;
-  font-weight: 400;
-  font-size: clamp(1rem, 1vw + 0.8rem, 1.5rem) !important;
+  font-size: calc(var(--font-scale) * 1.1em) !important;
+  /* font-weight: 400; */
+  transition: font-size 0.2s ease-in-out;
 }
+
+h2, h3, h4, h5, h6 {
+  font-size: calc(var(--font-scale) * 1.75em) !important;
+  transition: font-size 0.2s ease-in-out;
+}
+
 
 /* dark mode transition here */
 .app-container {

@@ -28,3 +28,8 @@
     background-color: var(--primary-hover);
     border-radius: 18px;
 }
+
+.navbar .font-button {
+font-style: oblique;
+font-weight: 500;
+}

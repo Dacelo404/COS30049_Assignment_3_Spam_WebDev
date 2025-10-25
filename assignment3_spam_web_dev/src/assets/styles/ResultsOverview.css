@@ -1,18 +1,12 @@
 .MuiDataGrid-root {
   background-color: var(--bg-colour-med) !important;
+  font-size: calc(var(--font-scale) * 0.9em) !important;
   color: var(--text-color) !important;
   border-radius: 10px;
   border: 1px solid var(--grey);
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* header  */
-.MuiDataGrid-columnHeaders {
-  background-color: var(--test) !important;
-  color: var(--text-color) !important;
-  font-weight: 600;
-
-}
 
 /* alternating row */
 .MuiDataGrid-row:nth-child(even) {
@@ -39,6 +33,11 @@
 .MuiTablePagination-root {
     color: var(--text-color) !important;
     border-top: 1px solid var(--grey); 
+  font-size: clamp(
+    0.4em,
+    calc(var(--font-scale) * 1em),
+    0.6em
+  ) !important;
 }
 
 .MuiTablePagination-root .MuiSvgIcon-root {
