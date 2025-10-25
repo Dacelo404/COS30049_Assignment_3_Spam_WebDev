@@ -10,6 +10,7 @@ import joblib
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+import io
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -101,10 +102,13 @@ class Model:
 
         return
     
-    def predict(self, csv):
+    def predict(self, file):
         self.model, self.vectorizer, self.scaler = joblib.load("ai_model.pkl")
         
-        df = pd.read_csv(csv)
+        #Turn uploaded file back into csv
+        csv = file.file.read()
+        df = pd.read_csv(io.BytesIO(csv))
+
         df = self.process_data(df)
 
         # Vectorize and scale features
@@ -123,7 +127,9 @@ class Model:
         predictions = self.model.predict(X_combined)
 
         df["is_spam"] = predictions
-        return df
+
+        result_df = df[["clean_text", "is_spam"]]
+        return result_df.to_dict(orient="records")
     
 if __name__ == "__main__":
     # Creating and procsesing
