@@ -19,7 +19,7 @@ function SusWords_Bar({
 
     const margin = { top: 30, right: 20, bottom: 40, left: 60 };
     const width = containerWidth - margin.left - margin.right;
-    const height = width - margin.top - margin.bottom; 
+    const height = width - ((margin.top - margin.bottom)*0.4); 
 
     // SVG
     const svg = d3
