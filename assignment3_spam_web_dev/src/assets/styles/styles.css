@@ -91,11 +91,15 @@ body, p, span, li{
   transition: font-size 0.2s ease-in-out;
 }
 
-h2, h3, h4, h5, h6 {
+h2, h3, h4, h5 {
   font-size: calc(var(--font-scale) * 1.75em) !important;
   transition: font-size 0.2s ease-in-out;
 }
 
+h6 {
+  font-size: calc(var(--font-scale) * 1em) !important;
+  transition: font-size 0.2s ease-in-out;
+}
 
 /* dark mode transition here */
 .app-container {
