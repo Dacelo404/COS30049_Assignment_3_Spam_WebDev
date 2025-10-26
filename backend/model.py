@@ -12,7 +12,7 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import io
-
+from utils import logger
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -104,7 +104,7 @@ class Model:
 
         return
     
-    def initalise(self, file):
+    def initialise(self, file):
         self.model, self.vectorizer, self.scaler = joblib.load("AI_model.pkl")
         
         #Turn uploaded file back into csv
@@ -190,14 +190,14 @@ class Model:
     def get_email_by_id(self, id):
         email = self.df[self.df["id"] == id]
         if email.empty:
-            return {"error":f"No email found with ID {id}"}
-        
-        return email[["preview","is_spam","confidence","category"]].to_dict(orient="records")[0]
+            return "Error"
+        else:
+            return email[["preview","is_spam","confidence","category"]].to_dict(orient="records")[0]
     
     def get_clusters(self):
         # Use bad_word_frequency and web_word_frequency for clustering
         cluster_data = self.df[['bad_word_frequency', 'web_word_frequency']].to_numpy()
-        
+
         # Fit KMeans
         kmeans = KMeans(n_clusters=2, random_state=42)
         kmeans.fit(cluster_data)
@@ -217,7 +217,7 @@ class Model:
         return clusters
     
 if __name__ == "__main__":
-    # Creating and procsesing
+    # Creating and processing
     df = pd.read_csv("training/emails.csv")
     model = Model()
     model.train(df)
