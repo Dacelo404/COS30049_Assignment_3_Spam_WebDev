@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from sklearn.cluster import KMeans
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
@@ -11,6 +12,7 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import io
+
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -102,8 +104,8 @@ class Model:
 
         return
     
-    def predict(self, file):
-        self.model, self.vectorizer, self.scaler = joblib.load("ai_model.pkl")
+    def initalise(self, file):
+        self.model, self.vectorizer, self.scaler = joblib.load("AI_model.pkl")
         
         #Turn uploaded file back into csv
         csv = file.file.read()
@@ -124,12 +126,95 @@ class Model:
         X_combined = hstack([X_text, numerical_scaled])
 
         # Make predictions
-        predictions = self.model.predict(X_combined)
+        df["is_spam"] = self.model.predict(X_combined)
 
-        df["is_spam"] = predictions
+        #Calculate the confidence for spam/ham
+        df["confidence"] = self.model.predict_proba(X_combined)[:, 1]
 
-        result_df = df[["clean_text", "is_spam"]]
-        return result_df.to_dict(orient="records")
+        #Categorise
+        df["category"] = pd.cut(
+            df["confidence"],
+            bins=[0, 0.5, 0.8, 1.0],
+            labels=["Healthy", "Uncertain", "Spam"],
+            include_lowest=True
+        )
+
+        #Give each email an ID
+        df = df.reset_index(drop=True) #Resets the index to 0 (in case it isnt already)
+        df["id"] = df.index + 1 #Start from 1
+
+        # Create a short preview (first 8 words of the clean_text)
+        df["preview"] = df["clean_text"].apply(
+            lambda t: " ".join(t.split()[:8]) + ("..." if len(t.split()) > 8 else "") #Limits the preview to first 8 words so the entire email won't be sent (for table)
+        )
+
+        self.df = df #Save the new dataframe (kinda like a 'database')
+        return df[["id","is_spam","confidence","category"]].to_dict(orient="records")
+
+    
+    def get_summary(self):
+        #Returns a count file of each category (as JSON)
+        summary = {
+            "safe": int((self.df["category"] == "Healthy").sum()),
+            "uncertain": int((self.df["category"] == "Uncertain").sum()),
+            "spam": int((self.df["category"] == "Spam").sum())
+        }
+        return summary
+    
+    def get_ratio(self):
+        #Get the ratio of spam to non-spam emails uploaded
+        spam_ratio = int((self.df["category"] == "Spam").sum()) / len(self.df) # num spam / length
+        ham_ratio = (len(self.df) - int((self.df["category"] == "Spam").sum())) / len(self.df) # num non-spam / length
+        
+        ratio = {
+            "spam": spam_ratio,
+            "not_spam": ham_ratio
+        }
+        return ratio
+    
+    def get_suspicious_words(self):
+        counts = {}
+        for word in SUSP_WORDS:
+            counts[word] = int(self.df["clean_text"].str.count(word).sum())
+        return counts
+    
+    def get_emails(self, category=None):
+        #Either returns ALL the emails, or the emails of a specific category
+        #Categories are "Healthy", "Uncertain" or "Spam"
+        if category is None:
+            filtered_df = self.df
+        else:
+            filtered_df = self.df[self.df["category"] == category]
+        return filtered_df[["id","preview", "is_spam", "confidence", "category"]].to_dict(orient="records")
+    
+    def get_email_by_id(self, id):
+        email = self.df[self.df["id"] == id]
+        if email.empty:
+            return {"error":f"No email found with ID {id}"}
+        
+        return email[["preview","is_spam","confidence","category"]].to_dict(orient="records")[0]
+    
+    def get_clusters(self):
+        # Use bad_word_frequency and web_word_frequency for clustering
+        cluster_data = self.df[['bad_word_frequency', 'web_word_frequency']].to_numpy()
+        
+        # Fit KMeans
+        kmeans = KMeans(n_clusters=2, random_state=42)
+        kmeans.fit(cluster_data)
+        
+        # Predict cluster for each email
+        self.df["cluster"] = kmeans.predict(cluster_data)
+        
+        # Build JSON-friendly output for frontend scatter chart
+        clusters = [
+            {
+                "x": float(row["bad_word_frequency"]),
+                "y": float(row["web_word_frequency"]),
+                "cluster": int(row["cluster"])
+            }
+            for _, row in self.df.iterrows()
+        ]
+        return clusters
     
 if __name__ == "__main__":
     # Creating and procsesing
