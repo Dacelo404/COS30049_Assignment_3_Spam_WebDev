@@ -33,24 +33,26 @@ def get_db():
     return {"db": "Simulated database connection"} #simulated access, will resolve once model is adapted
 
 @app.get("/results")
-async def results_overview(id: int, results: list, db=Depends(get_db())):
-    for id in [1]: #simulated access, will resolve once model is adapted
-        results.append({"id": id, "db_connection": db["db"]})
-    return {"results": results}
+async def results_overview():
+    records = model.retrieve() #stub
+    return {"results": records}
 
 @app.get("/results/{id}")
-async def results_singular(id: int, db=Depends(get_db())):
-    if id not in [1]: #simulated access, will resolve once model is adapted
-        raise HTTPException(status_code=404, detail="Message not found")
-    return {"id": id, "db_connection": db["db"]}
+async def results_singular(id: int):
+    record = "hi"#model.retrieve(id) #stub
+    # if record == "not found": #stub error
+    #     raise HTTPException(status_code=404, detail="Message not found")
+    return {"result": record}
 
 @app.post("/uploadfile")
 async def predict_spam(file: UploadFile):
     try:
         predict = model.predict(file)
 
-        for id in file:
-            logger.info(f"Prediction made: {predict.is_spam} for {predict.id} from {file.filename}")
+        i = 1
+        for entry in predict:
+            logger.info(f"Prediction made: {entry["is_spam"]} for record #{i}")# from {entry.filename}")
+            i = i + 1
 
         return {"results": predict}
     

@@ -133,7 +133,7 @@ class Model:
     
 if __name__ == "__main__":
     # Creating and procsesing
-    df = pd.read_csv("backend/training/emails.csv")
+    df = pd.read_csv("training/emails.csv")
     model = Model()
     model.train(df)
     
