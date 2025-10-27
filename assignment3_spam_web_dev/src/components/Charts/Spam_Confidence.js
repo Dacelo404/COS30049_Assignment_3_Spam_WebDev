@@ -2,20 +2,7 @@ import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import { Box } from "@mui/material";
 
-function SpamConfidence({
-  data = [
-    { id: 1, subject: "Win a free iPhone", confidence: 0.91 },
-    { id: 2, subject: "Meeting Reminder", confidence: 0.12 },
-    { id: 3, subject: "Password Reset", confidence: 0.65 },
-    { id: 4, subject: "Claim your reward", confidence: 0.85 },
-    { id: 5, subject: "Project Update", confidence: 0.35 },
-    { id: 6, subject: "Urgent: Account Lock", confidence: 0.51 },
-    { id: 7, subject: "New Video Link", confidence: 0.18 },
-    { id: 8, subject: "Cryptocurrency offer", confidence: 0.99 },
-    { id: 9, subject: "Weekly Report", confidence: 0.05 },
-    { id: 10, subject: "You've been selected!", confidence: 0.78 },
-  ]
-}) {
+function SpamConfidence({ data = [] }) {
   const chartRef = useRef();
 
 
@@ -66,6 +53,7 @@ function SpamConfidence({
 
     // scale
     const x = d3.scalePoint()
+        // .scalePoint()
         .domain(sortedData.map(d => d.id))
         .range([0, width])
         .padding(0.5);
@@ -99,10 +87,11 @@ function SpamConfidence({
         .attr("class", "dot")
         .attr("cx", d => x(d.id))
         .attr("cy", d => y(d.confidence))
-        .attr("r", 6)
+        .attr("r", 3)
         .attr("fill", d => getColor(d.confidence))
         .attr("stroke", "white")
-        .attr("stroke-width", 1.5)
+        .attr("stroke-width", 0.1)
+        .attr("opacity", 0.6)
         .on("mouseover", function (event, d) {
             d3.select(this).attr("r", 8);
 
@@ -114,8 +103,8 @@ function SpamConfidence({
                 .style("opacity", 1)
                 .html(`
                     <strong>ID:</strong> ${d.id}<br>
-                    <strong>Subject:</strong> ${d.subject}<br>
-                    <strong>Confidence:</strong> ${d.confidence.toFixed(2)} (${riskLevel})
+                    <strong>Type:</strong> ${d.is_spam === 1 ? "Spam" : "Ham"}<br>
+                    <strong>Confidence:</strong> ${(d.confidence * 100).toFixed(2)} (${riskLevel})
                 `)
                 .style("left", `${mx + 12}px`)
                 .style("top", `${my - 24}px`);
@@ -131,10 +120,11 @@ function SpamConfidence({
             tooltip.style("opacity", 0);
       });
 
+      //x axis labels
+    // svg.append("g")
+      // .attr("transform", `translate(0,${height})`)
+      // .call(d3.axisBottom(x).tickFormat(() => "")); // hides all labels
 
-    svg.append("g")
-        .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x));
     
     //x label
     svg.append("text")

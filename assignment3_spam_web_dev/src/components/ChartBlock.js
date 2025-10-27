@@ -22,7 +22,7 @@ function ChartBlock({results}) {
       {chartIndex === 0 && <SpamRatio_Pie data={results.spam_ratio}/>}
       {chartIndex === 1 && <SusWords_Bar data={results.suspicious_words}/>}
       {chartIndex === 2 && <ClusterData_Scatter data={results.clusters}/>}
-      {chartIndex === 3 && <Spam_Confidence />}
+      {chartIndex === 3 && <Spam_Confidence data={results.table}/>}
 
       <Box sx={{ mt: 2 }}>
         <Button variant="outlined" className="chart-button" onClick={handlePrev} sx={{ mr: 2 }}>
