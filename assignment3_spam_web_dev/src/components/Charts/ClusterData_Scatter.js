@@ -78,17 +78,16 @@ function ClusterData_Scatter({
       .attr("class", "dot")
       .attr("cx", (d) => x(d.x))
       .attr("cy", (d) => y(d.y))
-      .attr("r", 6)
+      .attr("r", 4)
       .attr("fill", (d) => color(d.cluster))
-      .attr("opacity", 0.85)
+      .attr("opacity", 0.8)
       .on("mouseover", function (event, d) {
         d3.select(this).attr("r", 8);
         const [mx, my] = d3.pointer(event, chartRef.current);
         tooltip
           .style("opacity", 1)
           .html(
-            `<strong>Cluster:</strong> ${d.cluster}<br/>
-             X: ${d.x}<br/>Y: ${d.y}`
+            `<strong>Classification:</strong> ${d.cluster === 1 ? "Spam" : "Not Spam"}`
           )
           .style("left", `${mx + 12}px`)
           .style("top", `${my - 24}px`);

@@ -12,14 +12,16 @@ function ChartBlock({results}) {
   const handleNext = () => setChartIndex((prev) => (prev + 1) % 4);
   const handlePrev = () => setChartIndex((prev) => (prev - 1 + 4) % 4);
 
-  console.log("Spam ratio passed to chart:", results?.spam_ratio);
+
+  //test log
+  // console.log("Spam ratio passed to chart:", results?.spam_ratio);
 
 
   return (
     <Box className="chart-container" sx={{ textAlign: "center" }}>
       {chartIndex === 0 && <SpamRatio_Pie data={results.spam_ratio}/>}
-      {chartIndex === 1 && <SusWords_Bar />}
-      {chartIndex === 2 && <ClusterData_Scatter />}
+      {chartIndex === 1 && <SusWords_Bar data={results.suspicious_words}/>}
+      {chartIndex === 2 && <ClusterData_Scatter data={results.clusters}/>}
       {chartIndex === 3 && <Spam_Confidence />}
 
       <Box sx={{ mt: 2 }}>

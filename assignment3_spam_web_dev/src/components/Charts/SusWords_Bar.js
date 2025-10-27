@@ -2,14 +2,12 @@ import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import { Box } from "@mui/material";
 
-function SusWords_Bar({
-  data = { free: 1277, click: 803, money: 805, offer: 522, prize: 410 }
-}) {
+function SusWords_Bar({ data }) {
   const chartRef = useRef();
 
 
   const drawChart = () => {
-    if (!chartRef.current) return;
+    if (!chartRef.current || !data || Object.keys(data).length === 0) return;
 
     //get width
     const containerWidth = chartRef.current.getBoundingClientRect().width;
@@ -129,7 +127,7 @@ function SusWords_Bar({
         return () => {
             window.removeEventListener("resize", handleResize);
         };
-    }, [data]);
+    }, [JSON.stringify(data)]);
 
   return (
     <Box sx={{ textAlign: "center", position: "relative" }}>

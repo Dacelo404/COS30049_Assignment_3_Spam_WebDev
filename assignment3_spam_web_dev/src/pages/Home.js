@@ -19,21 +19,6 @@ console.log("Full backend results:", resultsData);
     name: file.name,
     size: (file.size / 1048576).toFixed(2) + " MB",
   });
-
-    // // TMP DATA FOR TEST
-    // const tmpResults = {
-    //   summary: {
-    //     healthy: 12,
-    //     risk: 42,
-    //     spam: 3,
-    //   },
-    //   table: [
-    //     { id: 1, category: "Safe", subject: "Meeting Reminder", content: "Team meeting at 3pm", confidence: 0.98 },
-    //     { id: 2, category: "Spam", subject: "Win a FREE iPhone!", content: "Click here to claim", confidence: 0.91 },
-    //     { id: 3, category: "Risk", subject: "Password Reset", content: "Reset your account now", confidence: 0.76 },
-    //   ],
-    // };
-    // setResults(tmpResults);
   };
 
   return (
