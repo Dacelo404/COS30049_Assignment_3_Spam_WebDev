@@ -24,7 +24,7 @@ console.log("Full backend results:", resultsData);
   return (
     <Container  maxWidth="md" sx={{ py: 4 }}>
       {/* intro spiel */}
-      <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
+      <Paper elevation={3} sx={{ p: 3, mb: 3 }} className="fade-in">
         <Typography variant="h1" gutterBottom>Intro to Project</Typography>
         <Typography variant="body">
           Using our AI machine learning model, you can upload datasets in CSV or TXT format.
@@ -33,7 +33,7 @@ console.log("Full backend results:", resultsData);
       </Paper>
 
       {/* upload + overview results */}
-      <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
+      <Paper elevation={3} sx={{ p: 3, mb: 3 }} className="fade-in">
         {!results ? (
           <>
             <Typography variant="h6" gutterBottom>Upload CSV or TXT File</Typography>
@@ -58,7 +58,7 @@ console.log("Full backend results:", resultsData);
       </Paper>
 
       {/* how to use + charts area */}
-      <Paper elevation={3} sx={{ p: 3 }}>
+      <Paper elevation={3} sx={{ p: 3 }} className="fade-in">
         {!results ? (
           <Box sx={{ textAlign: "center" }}>
             <Typography variant="h6" gutterBottom>How to Use</Typography>

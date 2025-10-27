@@ -106,7 +106,7 @@ function FileUpload({ onUpload }) {
         color="primary"
         className="upload-button"
         onClick={handleUpload}
-        disabled={!selectedFile}
+        disabled={!selectedFile || isUploading}
       >
         Upload
       </Button>
