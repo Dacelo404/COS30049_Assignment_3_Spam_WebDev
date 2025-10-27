@@ -12,6 +12,7 @@ const [fileInfo, setFileInfo] = useState(null);
   // TMP, CHANGE LATER FOR API STUFF
   const handleFileUpload = (resultsData, file) => {
     console.log("Uploaded file:", file);
+console.log("Full backend results:", resultsData);
 
   setResults(resultsData);
   setFileInfo({
@@ -19,20 +20,20 @@ const [fileInfo, setFileInfo] = useState(null);
     size: (file.size / 1048576).toFixed(2) + " MB",
   });
 
-    // TMP DATA FOR TEST
-    const tmpResults = {
-      summary: {
-        healthy: 12,
-        risk: 42,
-        spam: 3,
-      },
-      table: [
-        { id: 1, category: "Safe", subject: "Meeting Reminder", content: "Team meeting at 3pm", confidence: 0.98 },
-        { id: 2, category: "Spam", subject: "Win a FREE iPhone!", content: "Click here to claim", confidence: 0.91 },
-        { id: 3, category: "Risk", subject: "Password Reset", content: "Reset your account now", confidence: 0.76 },
-      ],
-    };
-    setResults(tmpResults);
+    // // TMP DATA FOR TEST
+    // const tmpResults = {
+    //   summary: {
+    //     healthy: 12,
+    //     risk: 42,
+    //     spam: 3,
+    //   },
+    //   table: [
+    //     { id: 1, category: "Safe", subject: "Meeting Reminder", content: "Team meeting at 3pm", confidence: 0.98 },
+    //     { id: 2, category: "Spam", subject: "Win a FREE iPhone!", content: "Click here to claim", confidence: 0.91 },
+    //     { id: 3, category: "Risk", subject: "Password Reset", content: "Reset your account now", confidence: 0.76 },
+    //   ],
+    // };
+    // setResults(tmpResults);
   };
 
   return (
@@ -61,8 +62,8 @@ const [fileInfo, setFileInfo] = useState(null);
             <Typography variant="subtitle1" gutterBottom>
               Uploaded file: {fileInfo?.name} ({fileInfo?.size})
             </Typography>
-            <Typography>Healthy: {results.summary.healthy}</Typography>
-            <Typography>Potential Risk: {results.summary.risk}</Typography>
+            <Typography>Healthy: {results.summary.safe}</Typography>
+            <Typography>Potential Risk: {results.summary.uncertain}</Typography>
             <Typography>Spam: {results.summary.spam}</Typography>
             <Box sx={{ mt: 2 }}>
               <ResultsOverview overview={results.summary} tableRows={results.table} />
@@ -81,7 +82,7 @@ const [fileInfo, setFileInfo] = useState(null);
             <Typography>Step 3: Explore AI Performance</Typography>
           </Box>
         ) : (
-          <ChartBlock />
+          <ChartBlock results={results}/>
         )}
       </Paper>
     </Container>

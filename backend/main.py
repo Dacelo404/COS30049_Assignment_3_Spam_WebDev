@@ -24,7 +24,7 @@ async def predict_spam(file: UploadFile):
         predict = model.initialise(file)
 
         for entry in predict:
-            logger.info(f"Prediction made: {entry["is_spam"]} for record #{entry["id"]} from {file.filename}")
+            logger.info(f"Prediction made: {entry['is_spam']} for record #{entry['id']} from {file.filename}")
 
         return {"results": predict}
     
@@ -72,7 +72,7 @@ async def clusters():
         clustering = model.get_clusters()
 
         for entry in clustering:
-            logger.info(f"X: {entry["x"]}, Y: {entry["y"]}, cluster: {entry["cluster"]}")
+            logger.info(f"X: {entry['x']}, Y: {entry['y']}, cluster: {entry['cluster']}")
 
         return {"clusters": clustering}
     except Exception as e:
@@ -86,7 +86,7 @@ async def results_overview(category: str = None):
         records = model.get_emails(category)
         
         for entry in records:
-            logger.info(f"Record #{entry["id"]} with the preview {entry["preview"]} is classified as {entry["is_spam"]} with {entry["confidence"]} confidence")
+            logger.info(f"Record #{entry['id']} with the preview {entry['preview']} is classified as {entry['is_spam']} with {entry['confidence']} confidence")
         
         return {"results": records}
     except Exception as e:
@@ -102,7 +102,7 @@ async def results_singular(id: int):
         if record == "Error":
             raise HTTPException(status_code=404, detail="Message not found")
         else:
-            logger.info(f"Record #{id} with the preview {record["preview"]} is classified as {record["is_spam"]} with {record["confidence"]} confidence")
+            logger.info(f"Record #{id} with the preview {record['preview']} is classified as {record['is_spam']} with {record['confidence']} confidence")
         
         return {"result": record}
     except Exception as e:

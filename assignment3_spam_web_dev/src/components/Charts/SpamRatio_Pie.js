@@ -2,12 +2,20 @@ import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import { Box } from "@mui/material";
 
-function SpamRatio_Pie({ data = { spam: 23, not_spam: 77 } }) {
-    const chartRef = useRef();
+function SpamRatio_Pie({ data })  {
+  
+    
+  
+  const chartRef = useRef();
 
 
     const drawChart = () => {
-        if (!chartRef.current) return;
+        if (!chartRef.current || !data) return;
+
+        const spam = data.spam ?? 0;
+        const not_spam = data.not_spam ?? 0;
+
+        const dataset = { spam, not_spam };
 
         //get width
         const containerWidth = chartRef.current.getBoundingClientRect().width;

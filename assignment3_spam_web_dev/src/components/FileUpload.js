@@ -34,63 +34,71 @@ function FileUpload({ onUpload }) {
 
   };
 
-// ************ WHILE NO BACKEND, USING TMP DATA ************
-//   // Upload file
-//   const handleUpload = async () => {
-//     if (!selectedFile) {
-//       alert("Please select a file before uploading.");
-//       return;
-//     }
 
-//     const formData = new FormData();
-//     formData.append("myFile", selectedFile, selectedFile.name);
-
-//     try {
-//       const response = await axios.post("/api/uploadfile", formData, {
-//         headers: { "Content-Type": "multipart/form-data" },
-//       });
-
-//       console.log("File uploaded successfully:", response.data);
-
-//       // if success, pass data
-//       if (onUpload) onUpload(response.data);
-
-//     } catch (error) {
-//       console.error("Error uploading file:", error);
-//       alert("File upload failed. Please try again.");
-//     }
-//   };
-
-// ************ TMP DATA ************
-
-// TMP TEST upload
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (!selectedFile) {
       alert("Please select a file before uploading.");
       return;
     }
 
-    setTimeout(() => {
-      console.log("*TMP* upload successful:", selectedFile.name);
+    const formData = new FormData();
+    formData.append("file", selectedFile);
 
-      // TMP data
-      const TMPData = {
-        summary: {
-          healthy: 12,
-          risk: 42,
-          spam: 3,
+    //upload file to backend here
+    try{
+      const response = await axios.post("http://127.0.0.1:8000/uploadfile", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
         },
-        table: [
-          { id: 1, category: "Safe", subject: "Meeting Reminder", content: "Team meeting at 3pm", confidence: 0.98 },
-          { id: 2, category: "Spam", subject: "Win a FREE iPhone!", content: "Click here to claim", confidence: 0.91 },
-          { id: 3, category: "Risk", subject: "Password Reset", content: "Reset your account now", confidence: 0.76 },
-        ],
-      };
+      });
 
-      if (onUpload) onUpload(TMPData, selectedFile);
-      alert("*TMP* File uploaded successfully.");
-    }, 1000);
+      console.log("Upload successful: ", response.data);
+
+      //Fetch from backend
+    const [summaryResponse, ratioResponse, suspiciousResponse, clusterResponse, allResponse] = await Promise.all([
+      axios.get("http://127.0.0.1:8000/results/category_count"),
+      axios.get("http://127.0.0.1:8000/results/spam_ratio"),
+      axios.get("http://127.0.0.1:8000/results/suspicious"),
+      axios.get("http://127.0.0.1:8000/results/clusters"),
+      axios.get("http://127.0.0.1:8000/results/all"),
+    ]);
+
+
+    const combinedResults = {
+        summary: summaryResponse.data.count,
+        spam_ratio: ratioResponse.data.ratio,
+        suspicious_words: suspiciousResponse.data.suspicious,
+        clusters: clusterResponse.data.clusters,
+        table: allResponse.data.results,
+    };
+
+      if (onUpload) onUpload(combinedResults, selectedFile);
+    } catch (error) {
+      console.error("Upload or fetch failed:", error);
+      alert("Upload failed. Check backend connection.");
+    }
   };
+
+
+
+    // setTimeout(() => {
+      // console.log("*TMP* upload successful:", selectedFile.name);
+      // // TMP data
+      // const TMPData = {
+      //   summary: {
+      //     healthy: 12,
+      //     risk: 42,
+      //     spam: 3,
+      //   },
+      //   table: [
+      //     { id: 1, category: "Safe", subject: "Meeting Reminder", content: "Team meeting at 3pm", confidence: 0.98 },
+      //     { id: 2, category: "Spam", subject: "Win a FREE iPhone!", content: "Click here to claim", confidence: 0.91 },
+      //     { id: 3, category: "Risk", subject: "Password Reset", content: "Reset your account now", confidence: 0.76 },
+      //   ],
+      // };
+      // if (onUpload) onUpload(TMPData, selectedFile);
+      // alert("*TMP* File uploaded successfully.");
+    // }, 1000);
 
 
 
