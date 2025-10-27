@@ -11,6 +11,8 @@ function FileUpload({ onUpload }) {
 
   const fileInputRef = useRef(null);
 
+  const [isUploading, setIsUploading] = useState(false);
+
   // file selection
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -41,6 +43,7 @@ function FileUpload({ onUpload }) {
       return;
     }
 
+    setIsUploading(true);
     const formData = new FormData();
     formData.append("file", selectedFile);
 
@@ -77,28 +80,9 @@ function FileUpload({ onUpload }) {
       console.error("Upload or fetch failed:", error);
       alert("Upload failed. Check backend connection.");
     }
+    setIsUploading(false);
   };
 
-
-
-    // setTimeout(() => {
-      // console.log("*TMP* upload successful:", selectedFile.name);
-      // // TMP data
-      // const TMPData = {
-      //   summary: {
-      //     healthy: 12,
-      //     risk: 42,
-      //     spam: 3,
-      //   },
-      //   table: [
-      //     { id: 1, category: "Safe", subject: "Meeting Reminder", content: "Team meeting at 3pm", confidence: 0.98 },
-      //     { id: 2, category: "Spam", subject: "Win a FREE iPhone!", content: "Click here to claim", confidence: 0.91 },
-      //     { id: 3, category: "Risk", subject: "Password Reset", content: "Reset your account now", confidence: 0.76 },
-      //   ],
-      // };
-      // if (onUpload) onUpload(TMPData, selectedFile);
-      // alert("*TMP* File uploaded successfully.");
-    // }, 1000);
 
 
 
@@ -106,7 +90,7 @@ function FileUpload({ onUpload }) {
     <Box className="upload-wrapper">
       <Box className="upload-container" onClick={() => fileInputRef.current.click()}>
         <input type="file" ref={fileInputRef} hidden onChange={handleFileChange} />
-        <img src={uploadIcon} alt="Upload" className="upload-icon" />
+        <img src={uploadIcon} alt="Upload" className={`upload-icon ${isUploading ? "uploading" : ""}`} />
       </Box>
 
       {selectedFile && (
