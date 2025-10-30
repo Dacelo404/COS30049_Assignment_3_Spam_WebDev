@@ -24,7 +24,7 @@ console.log("Full backend results:", resultsData);
   return (
     <Container  maxWidth="md" sx={{ py: 4 }}>
       {/* intro spiel */}
-      <Paper elevation={3} sx={{ p: 3, mb: 3 }} className="fade-in">
+      <Paper elevation={3} sx={{ p: 3, mb: 3 }} className="fade-in" id = "intro" >
         <Typography variant="h1" gutterBottom>Intro to Project</Typography>
         <Typography variant="body">
           Using our AI machine learning model, you can upload datasets in CSV or TXT format.

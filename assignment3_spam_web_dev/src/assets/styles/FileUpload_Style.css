@@ -35,11 +35,15 @@
   margin-bottom: 8px;
 }
 
+
+/*
 .uploading {
   animation: spin 1s linear infinite;
 }
+*/
 
 /* Keyframes */
+/*
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -47,7 +51,9 @@
   to {
     transform: rotate(360deg);
   }
-}
+} 
+*/
+
 
 
 
@@ -85,4 +91,13 @@
 
 .upload-button:hover {
   background-color: var(--primary-hover) !important;
+}
+
+
+.upload-button-loading {
+  background-color: var(--bg-colour-light) !important; /* Use a color from your theme or a light/distinctive color */
+  color: var(--text-color) !important;
+  opacity: 50%;
+  pointer-events: none;
+  box-shadow: none !important;
 }

@@ -2,9 +2,11 @@ import React, { useState, useRef } from "react";
 import { Card, CardContent, Typography, Button, Box } from "@mui/material";
 import axios from "axios";
 import Snackbar from '@mui/material/Snackbar';
+import Lottie from "lottie-react";
 
 import "../assets/styles/FileUpload_Style.css";
-import uploadIcon from "../assets/images/test.png"; 
+import uploadIcon from "../assets/images/test.png";
+import animLoad from "../assets/images/Loading_Files.json";
 
 function FileUpload({ onUpload }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -90,7 +92,19 @@ function FileUpload({ onUpload }) {
     <Box className="upload-wrapper">
       <Box className="upload-container" onClick={() => fileInputRef.current.click()}>
         <input type="file" ref={fileInputRef} hidden onChange={handleFileChange} />
-        <img src={uploadIcon} alt="Upload" className={`upload-icon ${isUploading ? "uploading" : ""}`} />
+        {isUploading ? (
+          <Lottie
+            autoplay
+            loop
+            animationData={animLoad}
+          />
+        ) : (
+          <img
+            src= {uploadIcon}
+            alt="Upload"
+            className="upload-icon"
+          />
+        )}
       </Box>
 
       {selectedFile && (
@@ -103,8 +117,8 @@ function FileUpload({ onUpload }) {
       <Button
         variant="contained"
         size="small"
-        color="primary"
-        className="upload-button"
+        color={isUploading ? "secondary" : "primary"}
+        className={`upload-button ${isUploading ? "upload-button-loading" : ""}`}
         onClick={handleUpload}
         disabled={!selectedFile || isUploading}
       >
