@@ -78,9 +78,9 @@ function ClusterData_Scatter({
       .attr("class", "dot")
       .attr("cx", (d) => x(d.x))
       .attr("cy", (d) => y(d.y))
-      .attr("r", 4)
+      .attr("r", 3.5)
       .attr("fill", (d) => color(d.cluster))
-      .attr("opacity", 0.8)
+      // .attr("opacity", 0.8)
       .on("mouseover", function (event, d) {
         d3.select(this).attr("r", 8);
         const [mx, my] = d3.pointer(event, chartRef.current);
@@ -101,7 +101,13 @@ function ClusterData_Scatter({
       .on("mouseout", function () {
         d3.select(this).attr("r", 6);
         tooltip.style("opacity", 0);
-      });
+      })
+      
+      //anim here
+      .attr("opacity", 0)
+      .transition()
+      .duration(1200)
+      .attr("opacity", 0.85);
 
     // axes
     svg.append("g")

@@ -50,8 +50,8 @@ function SusWords_Bar({ data }) {
         .style("opacity", 0)
         .style("pointer-events", "none");
 
-//dashed lines here
-    svg.append("g")
+    //dashed lines here
+      svg.append("g")
         .attr("class", "grid")
         .attr("opacity", 0.1)
         .call(d3.axisLeft(y)
@@ -68,40 +68,51 @@ function SusWords_Bar({ data }) {
         .join("rect")
         .attr("class", "bar")
         .attr("x", d => x(d))
-        .attr("y", d => y(data[d]))
+        //anim
+        .attr("y", height)
         .attr("width", x.bandwidth())
-        .attr("height", d => height - y(data[d]))
+        .attr("height", 0)
         .attr("fill", barColor)
         .on("mouseover", function (event, d) {
-    d3.select(this).attr("fill", hoverColor);
+          d3.select(this).attr("fill", hoverColor);
 
-  // mouse pos
-    const [mx, my] = d3.pointer(event, chartRef.current);
+          // mouse pos for tooltip
+          const [mx, my] = d3.pointer(event, chartRef.current);
 
-    tooltip
-        .style("opacity", 1)
-        .html(`<strong>${d}</strong>: ${data[d]}`)
-        .style("left", `${mx + 12}px`)
-        .style("top", `${my - 24}px`);
-    })
-    .on("mousemove", function (event) {
-    const [mx, my] = d3.pointer(event, chartRef.current);
-    tooltip
-        .style("left", `${mx + 12}px`)
-        .style("top", `${my - 24}px`);
-    })
-    .on("mouseout", function () {
-    d3.select(this).attr("fill", barColor);
-    tooltip.style("opacity", 0);
-    });
+          tooltip
+              .style("opacity", 1)
+              .html(`<strong>${d}</strong>: ${data[d]}`)
+              .style("left", `${mx + 12}px`)
+              .style("top", `${my - 24}px`);
+        })
+        .on("mousemove", function (event) {
+          const [mx, my] = d3.pointer(event, chartRef.current);
+          tooltip
+            .style("left", `${mx + 12}px`)
+            .style("top", `${my - 24}px`);
+        })
+        .on("mouseout", function () {
+        d3.select(this).attr("fill", barColor);
+        tooltip.style("opacity", 0);
+        })
 
+        //anim bars here
+        .transition()
+        .duration(1000)
+        .ease(d3.easeCubicOut)
+        .attr("y", d => y(data[d]))
+        .attr("height", d => height - y(data[d]));
 
-
-    // axes
+    //x axis labels
     svg.append("g")
-        .attr("transform", `translate(0,${height})`)
-        .call(d3.axisBottom(x));
-
+      .attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x))
+      .selectAll("text")
+      .attr("transform", "rotate(-45)")
+      .style("text-anchor", "end")
+      .attr("dx", "-.8em")
+      .attr("dy", ".15em"); 
+    //y axis labels
     svg.append("g").call(d3.axisLeft(y));
 
     // ttle
@@ -110,8 +121,6 @@ function SusWords_Bar({ data }) {
         .attr("y", -10)
         .attr("class", "chart-title")
         .attr("text-anchor", "middle")
-        .style("font-weight", "bold")
-        .style("font-size", "14px")
         .text("Frequency of Suspicious Words");
   };
 

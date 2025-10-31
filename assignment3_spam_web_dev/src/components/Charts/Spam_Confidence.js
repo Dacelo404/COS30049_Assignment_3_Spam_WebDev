@@ -91,7 +91,7 @@ function SpamConfidence({ data = [] }) {
         .attr("fill", d => getColor(d.confidence))
         .attr("stroke", "white")
         .attr("stroke-width", 0.1)
-        .attr("opacity", 0.6)
+        // .attr("opacity", 0.6)
         .on("mouseover", function (event, d) {
             d3.select(this).attr("r", 8);
 
@@ -118,7 +118,14 @@ function SpamConfidence({ data = [] }) {
         .on("mouseout", function () {
             d3.select(this).attr("r", 6);
             tooltip.style("opacity", 0);
-      });
+      })
+      
+      
+      //anim here
+      .attr("opacity", 0)
+      .transition()
+      .duration(1200)
+      .attr("opacity", 0.85);
 
       //x axis labels
     // svg.append("g")
@@ -146,7 +153,7 @@ function SpamConfidence({ data = [] }) {
         .attr("dy", "1em")
         .style("text-anchor", "middle")
         .style("font-size", "12px")
-        .text("Spam Confidence Score (0 - 1)");
+        .text("Spam Confidence Score");
 
 
     // title

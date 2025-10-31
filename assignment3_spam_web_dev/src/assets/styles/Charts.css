@@ -16,22 +16,13 @@
   position: relative;
 }
 
-
-
-/* Chart titles (SVG <text> elements) */
+/* Chart titles svg */
 svg text.chart-title {
 fill: var(--text-color) !important;
 font-family: "dejanire-headline", serif !important;
 font-weight: 700 !important;
 font-style: normal !important;
-  /* font-size: calc(var(--font-scale) * 1.3em) !important; */
-  /* font-size: clamp(1rem, 1vw + 0.8rem, 1.5rem) !important; */
-
-    font-size: clamp(
-    0.75em,
-    calc(var(--font-scale) * 1em),
-    1em 
-  ) !important;
+font-size: clamp(0.75em, calc(var(--font-scale) * 1em), 1em ) !important;
 }
 
 
@@ -39,7 +30,7 @@ font-style: normal !important;
 /* D3 tooltips */
 .chart-tooltip {
   color: var(--text-color) !important;
-    font-size: calc(var(--font-scale) * 0.8em) !important;
+  font-size: calc(var(--font-scale) * 0.8em) !important;
   background-color: var(--bg-colour-light) !important;
   border: 1px solid var(--text-color-inverted) !important;
   border-radius: 6px;
@@ -52,13 +43,9 @@ font-style: normal !important;
 /* chart titles + axis etc */
 .chart-container text {
   fill: var(--text-color) !important;
-    /* font-size: calc(var(--font-scale) * 0.75em) !important; */
-
-  font-size: clamp(
-    0.75em,
-    calc(var(--font-scale) * 1em),
-    1em
-  ) !important;
-
+  font-size: clamp(0.75em, calc(var(--font-scale) * 0.8em),em) !important;
 }
+
+  /* --font-scale: font-size: clamp(1rem, 1vw + 0.8rem, 1.5rem); */
+
 
