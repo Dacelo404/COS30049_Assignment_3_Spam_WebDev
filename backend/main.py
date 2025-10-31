@@ -1,28 +1,30 @@
-from fastapi import FastAPI, HTTPException, UploadFile#, Request, Response, File
+from fastapi import FastAPI, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
-#from fastapi.responses import JSONResponse
-#from fastapi import BackgroundTasks
 from model import Model
 from utils import logger
-#import time
+#import time > add if wanting to include runtime checks
 
 app = FastAPI()
 
+# adds CORS Middleware processor with the origin of the front-end local host, allowing all methods and headers from it
 app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000"], allow_credentials=True,
                    allow_methods=["*"], allow_headers=["*"])
 
+# links to model.py (AI model integration)
 model = Model()
 
+# standard address for initial API connection
 @app.get("/") 
 async def root():
     return {"message": "Spam Detection Tool for Email API - Welcome"}
 
+# post request for file upload (input validation handled by front-end and AI model)
 @app.post("/uploadfile")
 async def predict_spam(file: UploadFile):
     try:
         predict = model.initialise(file)
 
+        # logger linked to utils.py, verifying the predictions made by the model
         for entry in predict:
             logger.info(f"Prediction made: {entry['is_spam']} for record #{entry['id']} from {file.filename}")
 
@@ -33,6 +35,7 @@ async def predict_spam(file: UploadFile):
 
         raise HTTPException(status_code=500, detail="Bad file type")
     
+# get request for the total number of messages classified per category
 @app.get("/results/category_count")
 async def category_counts():
     try:
@@ -44,6 +47,7 @@ async def category_counts():
 
         raise HTTPException(status_code=500, detail="Model not initialised with user data")
 
+# get request for the ratio of spam/benign messages
 @app.get("/results/spam_ratio")
 async def spam_ratio():
     try:
@@ -55,6 +59,7 @@ async def spam_ratio():
 
         raise HTTPException(status_code=500, detail="Model not initialised with user data")
 
+# get request for receiving the number of words identified as suspicious based on a pre-determined list
 @app.get("/results/suspicious")
 async def suspicious_words():
     try:
@@ -66,6 +71,7 @@ async def suspicious_words():
 
         raise HTTPException(status_code=500, detail="Model not initialised with user data")
 
+# get request for acquiring the cluster allocation for each message
 @app.get("/results/clusters")
 async def clusters():
     try:
@@ -80,6 +86,7 @@ async def clusters():
 
         raise HTTPException(status_code=500, detail="Model not initialised with user data")
 
+# get request for receiving the records for all messages
 @app.get("/results/all")
 async def results_overview(category: str = None):
     try:
@@ -94,6 +101,7 @@ async def results_overview(category: str = None):
 
         raise HTTPException(status_code=500, detail="Model not initialised with user data")
 
+# get request for receiving a specific record if it exists
 @app.get("/results/{id}")
 async def results_singular(id: int):
     try:
