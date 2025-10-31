@@ -36,8 +36,16 @@ npm start
 Open a browser and visit http://localhost:3000 to access the website
 
 ## Using the Website
-1. According to all known laws of aviation
-2. There is no way a bee should be able to fly
-3. Its wings are too small for its fat little body to get off the ground
-4. The bee however, flies anyways
-5. Because it does not care what humans think is possible
+1. Upload a dataset file
+Use either a .csv or .txt file containing email or sms data
+2. View results summary
+Once uploaded, file goes to backend and it starts processing the file using our AI model
+3. Explore data vis
+View results as a brief overview table, or navigate between charts using next and prev. buttons
+4. Toggle light/dark 
+In the nav bar, press button to change the theme
+5. Adjust font size
+In the nav bar, press Aa+ to increase font size
+Aa- to reset font size
+
+6. Reload page to upload new file

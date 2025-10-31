@@ -97,6 +97,7 @@ function FileUpload({ onUpload }) {
             autoplay
             loop
             animationData={animLoad}
+            className="upload-gif"
           />
         ) : (
           <img
