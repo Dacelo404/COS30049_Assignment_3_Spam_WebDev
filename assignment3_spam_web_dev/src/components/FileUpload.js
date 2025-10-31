@@ -5,7 +5,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Lottie from "lottie-react";
 
 import "../assets/styles/FileUpload_Style.css";
-import uploadIcon from "../assets/images/test.png";
+import uploadIcon from "../assets/images/file_upload.png";
 import animLoad from "../assets/images/Loading_Files.json";
 
 function FileUpload({ onUpload }) {

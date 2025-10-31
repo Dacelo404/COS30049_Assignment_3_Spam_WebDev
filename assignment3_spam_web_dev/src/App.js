@@ -38,7 +38,7 @@ function App() {
         resetFont={resetFont}
       />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home darkMode={darkMode} />} />
         <Route path="/about" element={<About/>} />
       </Routes>
       <Footer />

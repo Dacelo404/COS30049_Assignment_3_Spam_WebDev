@@ -3,16 +3,21 @@ import FileUpload from "../components/FileUpload";
 import ResultsOverview from "../components/ResultsOverview";
 import { Container, Typography, Box, Paper, Grid, Button } from "@mui/material";
 
+import introGraphic from "../assets/images/AdobeStock_tree.png";
+import introGraphic_invert from "../assets/images/AdobeStock_tree_invert.png";
+
 import ChartBlock from "../components/ChartBlock";
 
-function Home() {
+function Home({darkMode}) {
 const [results, setResults] = useState(null);
 const [fileInfo, setFileInfo] = useState(null);
+const currentGraphic = darkMode ? introGraphic_invert : introGraphic;
 
-  // TMP, CHANGE LATER FOR API STUFF
-  const handleFileUpload = (resultsData, file) => {
-    console.log("Uploaded file:", file);
+// TMP, CHANGE LATER FOR API STUFF
+const handleFileUpload = (resultsData, file) => {
+console.log("Uploaded file:", file);
 console.log("Full backend results:", resultsData);
+
 
   setResults(resultsData);
   setFileInfo({
@@ -25,11 +30,14 @@ console.log("Full backend results:", resultsData);
     <Container  maxWidth="md" sx={{ py: 4 }}>
       {/* intro spiel */}
       <Paper elevation={3} sx={{ p: 3, mb: 3 }} className="fade-in" id = "intro" >
-        <Typography variant="h1" gutterBottom>Intro to Project</Typography>
+        <Box className = "intro_text_block">
+        <Typography variant="h1" gutterBottom>Spam Detector</Typography>
         <Typography variant="body">
-          Using our AI machine learning model, you can upload datasets in CSV or TXT format.
-          Add more details here...
+          Using our AI model, we can classify whether an email or sms is healthy, risky, or spam! 
+          Use our website to view results through interactive charts.
         </Typography>
+        </Box>
+        <img src = { currentGraphic } className="introGraphic"></img>
       </Paper>
 
       {/* upload + overview results */}
