@@ -36,16 +36,15 @@ npm start
 Open a browser and visit http://localhost:3000 to access the website
 
 ## Using the Website
-1. Upload a dataset file
+### 1. Upload a dataset file
 Use either a .csv or .txt file containing email or sms data
-2. View results summary
+### 2. View results summary
 Once uploaded, file goes to backend and it starts processing the file using our AI model
-3. Explore data vis
+### 3. Explore data vis
 View results as a brief overview table, or navigate between charts using next and prev. buttons
-4. Toggle light/dark 
+### 4. Toggle light/dark 
 In the nav bar, press button to change the theme
-5. Adjust font size
-In the nav bar, press Aa+ to increase font size
-Aa- to reset font size
-
-6. Reload page to upload new file
+### 5. Adjust font size
+In the nav bar, press Aa+ to increase font size and Aa- to reset font size
+### 6. Reload page to upload new file
+As the upload segment goes away after a valid file is successfully uploaded, the website will need to be refreshed to allow you to upload a new file
