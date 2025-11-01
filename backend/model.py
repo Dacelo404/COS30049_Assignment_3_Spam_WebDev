@@ -37,6 +37,15 @@ class Model:
         if (not isinstance(df,pd.DataFrame)):
             raise Exception("Input data has not been converted into dataframe")
         
+        # Remove spam/ham (or 0,1) if it exists
+        df["text"] = df["text"].str.replace(r'^(spam|ham|0|1)[\s,:-]*', '', regex=True)
+        df["text"] = df["text"].str.replace(r'[\s,:-]*(spam|ham|0|1)$', '', regex=True)
+        
+        # Create a short preview (first 8 words of the clean_text)
+        df["preview"] = df["text"].apply(
+            lambda t: " ".join(t.split()[:8]) + ("..." if len(t.split()) > 8 else "") #Limits the preview to first 8 words so the entire email won't be sent (for table)
+        )
+
         # Remove Subject: prefix and convert all text to lowercase
         df["text"] = df["text"].str.lower()
         df["text"] = df["text"].str.removeprefix("subject:")
@@ -107,9 +116,11 @@ class Model:
     def initialise(self, file):
         self.model, self.vectorizer, self.scaler = joblib.load("AI_model.pkl")
         
-        #Turn uploaded file back into csv
-        csv = file.file.read()
-        df = pd.read_csv(io.BytesIO(csv))
+        #Turn uploaded file into a data frame (CSV or txt)
+        content = file.file.read().decode("utf-8", errors="ignore")
+
+        lines = [line.strip() for line in content.splitlines() if line.strip()]
+        df = pd.DataFrame({"text": lines})
 
         df = self.process_data(df)
 
@@ -142,11 +153,6 @@ class Model:
         #Give each email an ID
         df = df.reset_index(drop=True) #Resets the index to 0 (in case it isnt already)
         df["id"] = df.index + 1 #Start from 1
-
-        # Create a short preview (first 8 words of the clean_text)
-        df["preview"] = df["clean_text"].apply(
-            lambda t: " ".join(t.split()[:8]) + ("..." if len(t.split()) > 8 else "") #Limits the preview to first 8 words so the entire email won't be sent (for table)
-        )
 
         self.df = df #Save the new dataframe (kinda like a 'database')
         return df[["id","is_spam","confidence","category"]].to_dict(orient="records")

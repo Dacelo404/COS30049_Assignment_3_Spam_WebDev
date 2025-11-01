@@ -4,7 +4,7 @@ This README file contains basic setup instructions for configuring the React.js 
 
 ## Installing Dependencies
 ```bash
-pip install fastapi uvicorn scikit-learn numpy pandas joblib nltk scipy
+pip install fastapi uvicorn scikit-learn numpy pandas joblib nltk scipy python-multipart
 ```
 
 ## Running the Project Files
