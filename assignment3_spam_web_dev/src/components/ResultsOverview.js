@@ -7,6 +7,7 @@ function ResultsOverview({ overview, tableRows }) {
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5, minWidth: 40},
     { field: "is_spam", headerName: "Spam/Ham", flex: 1, minWidth: 120, 
+      //here converting num 0/1 to string
       renderCell: (params) => {
         const value = Number(params.value); 
         if (value === 1) {

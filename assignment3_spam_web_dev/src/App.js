@@ -19,8 +19,8 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
+  //font scale here
   const [fontScale, setFontScale] = useState(1);
-
   useEffect(() => {
     document.documentElement.style.setProperty('--font-scale', fontScale);
   }, [fontScale]);

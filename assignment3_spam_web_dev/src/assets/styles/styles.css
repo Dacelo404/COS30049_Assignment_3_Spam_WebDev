@@ -1,5 +1,5 @@
 :root {
-  /* Light mode */
+  /* Light mode colours */
   --bg-colour-light: #F4F6F6;
   --bg-colour-med: #e7e7e7;
   --bg-colour-dark: #F4F6F6;
@@ -32,6 +32,7 @@
 }
 
 [data-theme='dark'] {
+  /* Dark mode colours */
   --bg-colour-light: #444444;
   --bg-colour-med: #282828;
   --bg-colour-dark: #0c0e00;
@@ -71,7 +72,7 @@ body {
 }
 
 
-/* font stuff */
+/* font scaling and font type stuff */
 h1 {
 font-family: "dejanire-headline", serif !important;
 font-weight: 700 !important;
@@ -89,14 +90,9 @@ h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em !important;
 }
 
-
-
-/* font scaling */
-
 body, p, span, li{
   font-family: "arboria", sans-serif !important;
   font-size: calc(var(--font-scale) * 1.1em) !important;
-  /* font-weight: 400; */
   transition: font-size 0.2s ease-in-out;
 }
 
@@ -117,7 +113,7 @@ h6 {
     transition: background-color 0.4s, color 0.4s;
 }
 
-
+/* bg colour + shadows for papers */
 .MuiPaper-root {
   background-color: var(--bg-colour-med) !important;
   color: var(--text-color) !important;
@@ -134,7 +130,7 @@ h6 {
 
 
 
-/* animation home cards */
+/* animation cards */
 @keyframes fadeUp {
   0% {
     opacity: 0;
@@ -155,17 +151,15 @@ h6 {
 .fade-in:nth-child(2) { animation-delay: 0.3s; }
 .fade-in:nth-child(3) { animation-delay: 0.5s; }
 
-
+/* intro */
 #intro {
   min-height: 300px;
-  /* backdrop-filter: blur(25px); */
-  /* -webkit-backdrop-filter: blur(25px); */
   position: relative;
   overflow: hidden; 
   background: linear-gradient(180deg, var(--grad-white), rgba(0,0,0,0.1));
 }
 
-
+/* tree img */
 .introGraphic {
   position: absolute;
   bottom: -30%;
@@ -179,7 +173,7 @@ h6 {
 }
 
 
-/* default */
+/* intro text */
 .intro_text_block {
   margin: 0;
   padding-left: 20%;

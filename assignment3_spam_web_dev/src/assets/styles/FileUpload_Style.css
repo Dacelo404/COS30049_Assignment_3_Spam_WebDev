@@ -41,27 +41,6 @@
 }
 
 
-/*
-.uploading {
-  animation: spin 1s linear infinite;
-}
-*/
-
-/* Keyframes */
-/*
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} 
-*/
-
-
-
-
 .file-info {
   position: absolute;
   bottom: 10px; 

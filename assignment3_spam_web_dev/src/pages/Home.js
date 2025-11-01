@@ -2,25 +2,23 @@ import React, { useState } from "react";
 import FileUpload from "../components/FileUpload";
 import ResultsOverview from "../components/ResultsOverview";
 import { Container, Typography, Box, Paper, Grid, Button } from "@mui/material";
-
 import introGraphic from "../assets/images/AdobeStock_tree.png";
 import introGraphic_invert from "../assets/images/AdobeStock_tree_invert.png";
-
 import ChartBlock from "../components/ChartBlock";
 
 function Home({darkMode}) {
 const [results, setResults] = useState(null);
 const [fileInfo, setFileInfo] = useState(null);
 const currentGraphic = darkMode ? introGraphic_invert : introGraphic;
-
-// TMP, CHANGE LATER FOR API STUFF
 const handleFileUpload = (resultsData, file) => {
+
+//test logs
 console.log("Uploaded file:", file);
 console.log("Full backend results:", resultsData);
 
-
-  setResults(resultsData);
-  setFileInfo({
+//update results + file name for display
+setResults(resultsData);
+setFileInfo({
     name: file.name,
     size: (file.size / 1048576).toFixed(2) + " MB",
   });

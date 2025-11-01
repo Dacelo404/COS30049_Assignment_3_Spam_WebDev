@@ -120,18 +120,11 @@ function SpamConfidence({ data = [] }) {
             tooltip.style("opacity", 0);
       })
       
-      
-      //anim here
-      .attr("opacity", 0)
-      .transition()
-      .duration(1200)
-      .attr("opacity", 0.85);
-
-      //x axis labels
-    // svg.append("g")
-      // .attr("transform", `translate(0,${height})`)
-      // .call(d3.axisBottom(x).tickFormat(() => "")); // hides all labels
-
+    //anim here
+    .attr("opacity", 0)
+    .transition()
+    .duration(1200)
+    .attr("opacity", 0.85);
     
     //x label
     svg.append("text")

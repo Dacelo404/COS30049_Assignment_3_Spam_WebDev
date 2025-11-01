@@ -16,7 +16,7 @@ function ChartBlock({results}) {
   //test log
   // console.log("Spam ratio passed to chart:", results?.spam_ratio);
 
-
+  // loading charts here
   return (
     <Box className="chart-container" sx={{ textAlign: "center" }}>
       {chartIndex === 0 && <SpamRatio_Pie data={results.spam_ratio}/>}
