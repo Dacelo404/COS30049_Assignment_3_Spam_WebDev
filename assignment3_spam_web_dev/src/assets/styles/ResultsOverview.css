@@ -47,3 +47,17 @@
 .MuiTablePagination-root .MuiInputBase-root {
     color: var(--text-color) !important;
 }
+
+
+.export-button {
+  background-color: var(--accent-sage) !important;
+  color: var(--text-color-const-black) !important;
+  border-radius: 40px !important;
+  border: 1px solid var(--text-color-inverted) !important;
+  transition: background-color 0.4s !important;
+  font-size: calc(var(--font-scale) * 0.75em) !important;
+}
+
+.export-button:hover {
+  background-color: var(--primary-hover) !important;
+}

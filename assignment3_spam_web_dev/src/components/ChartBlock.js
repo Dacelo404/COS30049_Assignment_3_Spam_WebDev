@@ -18,17 +18,17 @@ function ChartBlock({results}) {
 
   // loading charts here
   return (
-    <Box className="chart-container" sx={{ textAlign: "center" }}>
+    <Box className="chart-container" sx={{ textAlign: "center" }} aria-label="4 Charts with next and previous buttons analysing spam data">
       {chartIndex === 0 && <SpamRatio_Pie data={results.spam_ratio}/>}
       {chartIndex === 1 && <SusWords_Bar data={results.suspicious_words}/>}
       {chartIndex === 2 && <ClusterData_Scatter data={results.clusters}/>}
       {chartIndex === 3 && <Spam_Confidence data={results.table}/>}
 
       <Box sx={{ mt: 2 }}>
-        <Button variant="outlined" className="chart-button" onClick={handlePrev} sx={{ mr: 2 }}>
+        <Button variant="outlined" className="chart-button" onClick={handlePrev} sx={{ mr: 2 }} aria-label="Button for previous chart">
           Previous
         </Button>
-        <Button variant="contained" className="chart-button" onClick={handleNext}>
+        <Button variant="contained" className="chart-button" onClick={handleNext} aria-label="Button for next chart">
           Next
         </Button>
       </Box>

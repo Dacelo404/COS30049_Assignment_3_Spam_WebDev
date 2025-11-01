@@ -87,9 +87,14 @@ function FileUpload({ onUpload }) {
 
 
   return (
-    <Box className="upload-wrapper">
-      <Box className="upload-container" onClick={() => fileInputRef.current.click()}>
-        <input type="file" ref={fileInputRef} hidden onChange={handleFileChange} />
+    <Box className="upload-wrapper" aria-label="Section to upload CSV or TXT file for analysis">
+      <Box className="upload-container" onClick={() => fileInputRef.current.click()} aria-label="Container to upload file">
+        <input 
+        type="file" 
+        ref={fileInputRef}
+        hidden onChange={handleFileChange} 
+        aria-label="Upload CSV or Text file for spam detection"
+        />
         {isUploading ? (
           <Lottie autoplay loop animationData={animLoad} className="upload-gif"/>
         ) : (
@@ -98,7 +103,7 @@ function FileUpload({ onUpload }) {
       </Box>
 
       {selectedFile && (
-        <Typography className="file-info">
+        <Typography className="file-info" aria-label="Upload file name and size">
           {selectedFile.name} ({
           (selectedFile.size / 1048576).toFixed(2)} MB)
         </Typography>
@@ -111,6 +116,7 @@ function FileUpload({ onUpload }) {
         className={`upload-button ${isUploading ? "upload-button-loading" : ""}`}
         onClick={handleUpload}
         disabled={!selectedFile || isUploading}
+        aria-label="Button to upload file for analysis"
       >
         Upload
       </Button>

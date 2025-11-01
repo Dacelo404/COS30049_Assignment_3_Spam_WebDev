@@ -1,8 +1,12 @@
 import React from "react";
-import { Grid, Card, CardContent, Typography } from "@mui/material";
+import { Grid, Card, CardContent, Typography, Box, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
+import { CSVLink } from "react-csv";
+import FileDownload from "@mui/icons-material/FileDownload";
+
 function ResultsOverview({ overview, tableRows }) {
+  
   // Columns for DataGrid
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5, minWidth: 40},
@@ -35,7 +39,38 @@ function ResultsOverview({ overview, tableRows }) {
   ];
 
   return (
-    <div>
+    <div aria-label="Spam detection results overviwe and export button">
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
+        <CSVLink
+            data={
+              tableRows && tableRows.length > 0
+                ? [
+                    ["ID", "Category", "Preview", "Category", "Confidence"],
+                    ...tableRows.map((row) => [
+                      row.id,
+                      row.category,
+                      row.preview,
+                      row.category,
+                      row.confidence,
+                    ]),
+                  ]
+                : []
+            }
+            filename={"spam_results.csv"}
+            className="export-link"
+            aria-label="Download table as CSV file"
+          >
+            <Button
+              variant="outlined"
+              className="export-button"
+              startIcon={<FileDownload />}
+              disabled={!tableRows || tableRows.length === 0}
+            >
+              Export Table (CSV)
+            </Button>
+          </CSVLink>
+        </Box>
+
       {/* Data Table */}
       <div style={{ height: 400, width: "100%", marginTop: "1rem", overflowX: "auto"}}>
         <DataGrid rows={tableRows} columns={columns} pageSize={10} />

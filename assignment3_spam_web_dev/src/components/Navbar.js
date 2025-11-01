@@ -9,14 +9,14 @@ function Navbar({darkMode, toggleDarkMode, increaseFont, resetFont}) {
         <Typography sx={{ flexGrow: 1 }}>
         </Typography>
 
-        <button onClick={increaseFont} className="font-button">
+        <button onClick={increaseFont} className="font-button" aria-label="Button to increase font size">
           Aa+
         </button>
-        <button onClick={resetFont} className="font-button">
+        <button onClick={resetFont} className="font-button" aria-label="Button to reset font size">
           Aa-
         </button>
 
-        <button onClick={toggleDarkMode}>
+        <button onClick={toggleDarkMode} aria-label="Button to toggle light or dark mode colours">
         {darkMode ? "Dark" : "Light"}
         </button>
         <Button color="inherit" component={Link} to="/">

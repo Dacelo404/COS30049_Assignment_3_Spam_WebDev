@@ -27,7 +27,12 @@ setFileInfo({
   return (
     <Container  maxWidth="md" sx={{ py: 4 }}>
       {/* intro spiel */}
-      <Paper elevation={3} sx={{ p: 3, mb: 3 }} className="fade-in" id = "intro" >
+      <Paper elevation={3} 
+      sx={{ p: 3, mb: 3 }} 
+      className="fade-in" 
+      id = "intro" 
+      aria-label="Intro to Spam Detector project"
+      >
         <Box className = "intro_text_block">
         <Typography variant="h1" gutterBottom>Spam Detector</Typography>
         <Typography variant="body">
@@ -35,11 +40,13 @@ setFileInfo({
           Use our website to view results through interactive charts.
         </Typography>
         </Box>
-        <img src = { currentGraphic } className="introGraphic"></img>
+        <img src = { currentGraphic } className="introGraphic" aria-label="Cyber tree image"></img>
       </Paper>
 
       {/* upload + overview results */}
-      <Paper elevation={3} sx={{ p: 3, mb: 3 }} className="fade-in">
+      <Paper elevation={3} sx={{ p: 3, mb: 3 }} className="fade-in"
+      aria-label={!results ? "File Upload Area" : "Spam Detection Results Summary"}
+      >
         {!results ? (
           <>
             <Typography variant="h6" gutterBottom>Upload CSV or TXT File</Typography>
@@ -64,7 +71,11 @@ setFileInfo({
       </Paper>
 
       {/* how to use + charts area */}
-      <Paper elevation={3} sx={{ p: 3 }} className="fade-in">
+      <Paper elevation={3} 
+      sx={{ p: 3 }} 
+      className="fade-in"
+      aria-label={!results ? "How to Use Application Steps" : "Detailed Chart Analysis"}
+      >
         {!results ? (
           <Box sx={{ textAlign: "center" }}>
             <Typography variant="h6" gutterBottom>How to Use</Typography>
